@@ -21,6 +21,10 @@ $ mvn clean install
 $ java -jar target/microbenchmarks.jar
 ```
 
+*Important note*: since currently this benchmark runs on a snapshot version of rtree (to test the feature of STR bulk loading), 
+you may need to pull the latest code from master branch of the rtree project and build and deploy the snapshot maven
+library to your local environment.
+
 ### Results
 on going
 
