@@ -19,4 +19,33 @@ public abstract class RStarTree extends RTreeBenchmark {
     RTree<Object, Rectangle> createOn1k() {
         return RTree.maxChildren(maxChildren()).star().<Object, Rectangle> create().add(entries1k06);
     }
+
+
+    public static class M4 extends RStarTree {
+        @Override
+        int maxChildren() {
+            return 4;
+        }
+    }
+
+    public static class M10 extends RStarTree {
+        @Override
+        int maxChildren() {
+            return 10;
+        }
+    }
+
+    public static class M32 extends RStarTree {
+        @Override
+        int maxChildren() {
+            return 32;
+        }
+    }
+
+    public static class M128 extends RStarTree {
+        @Override
+        int maxChildren() {
+            return 128;
+        }
+    }
 }

@@ -89,4 +89,33 @@ public abstract class FBSRTree extends RTreeBenchmark {
         if (byteArray1k == null) byteArray1k = createFBSByteArray(generator().rtree1k);
         return createFBSTree(byteArray1k);
     }
+
+
+    public static class M4 extends FBSRTree {
+        @Override
+        RStarTree generator() {
+            return new RStarTree.M4();
+        }
+    }
+
+    public static class M10 extends FBSRTree {
+        @Override
+        RStarTree generator() {
+            return new RStarTree.M10();
+        }
+    }
+
+    public static class M32 extends FBSRTree {
+        @Override
+        RStarTree generator() {
+            return new RStarTree.M32();
+        }
+    }
+
+    public static class M128 extends FBSRTree {
+        @Override
+        RStarTree generator() {
+            return new RStarTree.M128();
+        }
+    }
 }
