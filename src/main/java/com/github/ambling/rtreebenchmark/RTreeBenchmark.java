@@ -23,7 +23,7 @@
  * questions.
  */
 
-package com.github.ambling;
+package com.github.ambling.rtreebenchmark;
 
 import com.github.davidmoten.rtree.Entries;
 import com.github.davidmoten.rtree.Entry;
@@ -32,10 +32,6 @@ import com.github.davidmoten.rtree.geometry.Geometries;
 import com.github.davidmoten.rtree.geometry.Point;
 import com.github.davidmoten.rtree.geometry.Rectangle;
 import org.openjdk.jmh.annotations.*;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -111,7 +107,12 @@ public abstract class RTreeBenchmark {
      */
     abstract RTree<Object, Rectangle> createOn1k();
 
-
+    /**
+     * The benchmark cases, which are inheritanted by subclasses.
+     *
+     * User can invoke one or some of the cases through a regular expression, e.g.
+     * $ java -jar target/microbenchmarks.jar "com.github.ambling.rtreebenchmark.*.createIndexGreek"
+     */
     @GenerateMicroBenchmark
     public RTree<Object, Point> createIndexGreek() {
         return createOnGreek();

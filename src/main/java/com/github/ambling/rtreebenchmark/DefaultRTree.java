@@ -1,4 +1,4 @@
-package com.github.ambling;
+package com.github.ambling.rtreebenchmark;
 
 import com.github.davidmoten.rtree.RTree;
 import com.github.davidmoten.rtree.geometry.Point;

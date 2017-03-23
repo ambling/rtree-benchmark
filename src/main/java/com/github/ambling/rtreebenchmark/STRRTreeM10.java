@@ -1,4 +1,4 @@
-package com.github.ambling;
+package com.github.ambling.rtreebenchmark;
 
 /**
  * Test on STR bulk loaded R*-tree with maximum 10 children.

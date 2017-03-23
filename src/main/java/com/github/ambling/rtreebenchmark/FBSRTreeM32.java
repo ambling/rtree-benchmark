@@ -1,4 +1,4 @@
-package com.github.ambling;
+package com.github.ambling.rtreebenchmark;
 
 /**
  * Test on R*-tree on Flatbuffers with various maximum 32 children.

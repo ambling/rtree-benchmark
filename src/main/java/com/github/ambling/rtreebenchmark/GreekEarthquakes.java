@@ -1,4 +1,4 @@
-package com.github.ambling;
+package com.github.ambling.rtreebenchmark;
 
 import com.github.davidmoten.rtree.Entries;
 import com.github.davidmoten.rtree.Entry;

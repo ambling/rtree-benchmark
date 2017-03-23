@@ -1,4 +1,4 @@
-package com.github.ambling;
+package com.github.ambling.rtreebenchmark;
 
 /**
  * Test on default RTree (quadratic splitter (Guttman)) with maximum 4 children.

@@ -1,4 +1,4 @@
-package com.github.ambling;
+package com.github.ambling.rtreebenchmark;
 
 import com.github.davidmoten.rtree.InternalStructure;
 import com.github.davidmoten.rtree.RTree;
@@ -24,9 +24,9 @@ import java.io.IOException;
 public abstract class FBSRTree extends RTreeBenchmark {
     abstract RStarTree generator();
 
-    private final byte[] byteArrayGreek = createFBSByteArray(generator().createOnGreek());
+    protected final byte[] byteArrayGreek = createFBSByteArray(generator().createOnGreek());
 
-    private final byte[] byteArray1k = createFBSByteArray(generator().createOn1k());
+    protected final byte[] byteArray1k = createFBSByteArray(generator().createOn1k());
 
     private <Object, S extends Geometry> byte[] createFBSByteArray(RTree<Object, S> tree) {
         final ByteArrayOutputStream os = new ByteArrayOutputStream();
