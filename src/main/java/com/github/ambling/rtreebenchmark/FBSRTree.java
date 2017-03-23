@@ -24,9 +24,9 @@ import java.io.IOException;
 public abstract class FBSRTree extends RTreeBenchmark {
     abstract RStarTree generator();
 
-    protected final byte[] byteArrayGreek = createFBSByteArray(generator().createOnGreek());
+    protected byte[] byteArrayGreek = createFBSByteArray(generator().rtreeGreek);
 
-    protected final byte[] byteArray1k = createFBSByteArray(generator().createOn1k());
+    protected byte[] byteArray1k = createFBSByteArray(generator().rtree1k);
 
     private <Object, S extends Geometry> byte[] createFBSByteArray(RTree<Object, S> tree) {
         final ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -78,11 +78,15 @@ public abstract class FBSRTree extends RTreeBenchmark {
 
     @Override
     RTree<Object, Point> createOnGreek() {
+        // the array should be initialized in the warmup iteration
+        if (byteArrayGreek == null) byteArrayGreek = createFBSByteArray(generator().rtreeGreek);
         return createFBSTree(byteArrayGreek);
     }
 
     @Override
     RTree<Object, Rectangle> createOn1k() {
+        // the array should be initialized in the warmup iteration
+        if (byteArray1k == null) byteArray1k = createFBSByteArray(generator().rtree1k);
         return createFBSTree(byteArray1k);
     }
 }
