@@ -26,7 +26,38 @@ you may need to pull the latest code from master branch of the rtree project and
 library to your local environment.
 
 ### Results
-on going
+The experiments are conducted on two datasets:    
+
+- *Greek*: a collection of some 38,377 entries corresponding to the epicentres of earthquakes in Greece between 1964 and 2000. 
+- *1k*: uniformly generated 1000 rectangles.
+
+The benchmarked rtree types are:
+
+- *DefaultRTree*: the original rtree implementation proposed by Guttman with quadratic split.
+- *StarRTree*: R*-tree huristics.
+- *STRRTree*: STR bulk loaded R*-tree, with a default full ratio (0.7) in each node.
+- *STRFullRTree*: STR bulk loaded R*-tree, with full nodes.
+- *FBSRTree*: R*-tree loaded from a Flatbuffers serialized byte array. 
+
+We conduct several operations on each type of rtree with multiple `maxChildren` parameter. 
+
+The results are plotted with [plot.py](results/plot.py) and are presented as below.
+
+*Note: since the creation time of indexes span a large range, we use a logarithmic scale for the y axis.*
+
+| Greek | 1k |
+| :-------------: | :-----------: |
+| <img src="results/createIndex_Greek.png?raw=true" /> | <img src="results/createIndex_1k.png?raw=true" /> |
+| <img src="results/insertOne_Greek.png?raw=true" /> | <img src="results/insertOne_1k.png?raw=true" /> |
+| <img src="results/insertBatch_Greek.png?raw=true" /> | <img src="results/insertBatch_1k.png?raw=true" /> |
+| <img src="results/deleteOne_Greek.png?raw=true" /> | <img src="results/deleteOne_1k.png?raw=true" /> |
+| <img src="results/deleteBatch_Greek.png?raw=true" /> | <img src="results/deleteBatch_1k.png?raw=true" /> |
+| <img src="results/searchOne_Greek.png?raw=true" /> | <img src="results/searchOne_1k.png?raw=true" /> |
+| <img src="results/searchOneBackpressure_Greek.png?raw=true" /> | <img src="results/searchOneBackpressure_1k.png?raw=true" /> |
+| <img src="results/searchNearest_Greek.png?raw=true" /> | <img src="results/searchNearest_1k.png?raw=true" /> |
+
+
+Full results are presented in [rtreebm.txt](results/rtreebm.txt).
 
 ### Analysis
 on going
