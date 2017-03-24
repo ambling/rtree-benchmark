@@ -26,6 +26,12 @@ you may need to pull the latest code from master branch of the rtree project and
 library to your local environment.
 
 ### Results
+We conduct the experiments on a desktop server with:
+- 4-core Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz
+- 16GB DDR3 Memory
+- CentOS Linux 7 with linux kernel 3.10.0-327.el7.x86_64
+- openjdk-1.8.0.71-2.b15.el7_2.x86_64
+
 The experiments are conducted on two datasets:    
 
 - *Greek*: a collection of some 38,377 entries corresponding to the epicentres of earthquakes in Greece between 1964 and 2000. 
@@ -39,7 +45,8 @@ The benchmarked rtree types are:
 - *STRFullRTree*: STR bulk loaded R*-tree, with full nodes.
 - *FBSRTree*: R*-tree loaded from a Flatbuffers serialized byte array. 
 
-We conduct several operations on each type of rtree with multiple `maxChildren` parameter. 
+We test the performane of several operations on each type of rtree against various `maxChildren` parameter. 
+TODO: we should test the performance against dataset size.
 
 The results are plotted with [plot.py](results/plot.py) and are presented as below.
 
@@ -60,4 +67,31 @@ The results are plotted with [plot.py](results/plot.py) and are presented as bel
 Full results are presented in [rtreebm.txt](results/rtreebm.txt).
 
 ### Analysis
-on going
+
+##### Creation
+- *FBSRTree* is much faster than others, because it just loads the context and the root node, and it lazily loaded the nodes when need. 
+- *STR-Rtree* shows an order of magnitude of speedup comparing against the normal (R*-tree or DefaultRtree) creation process, 
+and shows little difference about the node full ratio (but maybe differ in index size).  
+- *R*-tree* is the slowest to construct.
+
+##### Insertion
+- *Default Rtree* shows the best insertion performance, both in one insertion and batch insertion.
+- *STR-Rtree* is not bad in single insertion if not full. Full STR-Rtree works as bad as the FBSRtree for one insertion.
+- If there are a lot of insertions occurs (need node split anyway), the performance of STR-Rtree is similar to R*-tree.
+- *FBS RTree* is slow at insertion.
+- It seems that less children is better for insertion.
+
+##### Deletion
+- It shows similar deletion performance for *DefaultRTree* and *R\*-tree* (for deletion, STR-Rtree is also R*-tree).
+- *FBS RTree* is 10x slower at deletion.
+- It seems that 10 children per node is good for deletion.
+
+##### Range Search
+- *R\*-tree* shows the best search performance for most cases.
+- *STR-Rtree* is not bad, and non-full nodes shows better than full nodes.
+- *FBS RTree* is 10x slower at search.
+- Backpressure shows performance decline.
+- Small nodes (less children) is better at search for most cases.
+ 
+##### Nearest Search
+- Currently (rtree-0.8-RC11-SNAPSHOT), the nearest search is based on a range search, therefore the results are similar. 
